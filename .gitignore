@@ -1,0 +1,17 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model and output files
+models/
+outputs/
+*.pkl
+
+# IDE settings
+.vscode/
+.idea/
