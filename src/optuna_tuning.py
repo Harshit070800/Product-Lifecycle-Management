@@ -98,7 +98,7 @@ def objective(trial, X, y):
     return np.mean(scores)
 
 
-# ===================== Hyperparameter Tuning =====================
+# Hyperparameter Tuning 
 def tune_and_select_best(X, y, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: objective(trial, X, y), n_trials=n_trials)
@@ -107,7 +107,7 @@ def tune_and_select_best(X, y, n_trials=50):
     return study.best_trial
 
 
-# ===================== Main Execution =====================
+# Main Execution
 if __name__ == "__main__":
     print("\n===== Optuna Model Selection: Lasso, Ridge, GBR, XGB =====\n")
 
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     gbr_study.optimize(gbr_objective, n_trials=30)
     print("\nOptuna GradientBoosting best parameters:", gbr_study.best_params)
 
-    # ===================== Train Models =====================
+    # Train Models
     lasso_reg = MultiOutputRegressor(Lasso(alpha=best_trial.params.get('lasso_alpha', 0.01), max_iter=10000))
     ridge_reg = MultiOutputRegressor(Ridge(alpha=ridge_study.best_params['ridge_alpha'], max_iter=10000))
     gbr_reg = MultiOutputRegressor(GradientBoostingRegressor(
@@ -183,7 +183,7 @@ if __name__ == "__main__":
         random_state=42
     ))
 
-    # ===================== Stacking Ensemble =====================
+    # Stacking Ensemble
     print("\nFitting Stacking Ensemble (Ridge + GBR + XGB)...")
     stacking = MultiOutputRegressor(StackingRegressor(
         estimators=[
@@ -215,7 +215,7 @@ if __name__ == "__main__":
         n_jobs=-1
     ))
 
-    # ===================== Evaluation & Model Saving 
+    # Evaluation & Model Saving 
     models = [
         ("lasso", lasso_reg, "../models/lasso.pkl"),
         ("ridge", ridge_reg, "../models/ridge.pkl"),

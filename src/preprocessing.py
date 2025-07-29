@@ -3,7 +3,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
-# ===== Global Configuration =====
+# Global Configuration  
 features = [
     'Product_Type', 'Component_Name', 'Change_Type', 'Urgency',
     'Change_Complexity', 'Supplier_Criticality', 'Past_Similar_Changes',
@@ -15,7 +15,7 @@ num_features = [f for f in features if f not in cat_features]
 
 target_columns = ['Approval_Time_Days', 'Parts_Affected', 'Risk_Score']
 
-# ===== Load Data =====
+# Load Data
 def load_data(path="../data/ecr_data.csv"):
     """Loads dataset from the given path."""
     return pd.read_csv(path)
@@ -26,7 +26,7 @@ def get_features_and_targets(df):
     y = df[target_columns]
     return X, y
 
-# ===== Build Preprocessing + Model Pipeline =====
+# Build Preprocessing + Model Pipeline
 def build_pipeline(regressor, scale_numerical=False):
     """
     Creates a pipeline with OneHotEncoder for categorical features
