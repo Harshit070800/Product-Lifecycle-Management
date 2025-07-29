@@ -1,8 +1,9 @@
 import joblib
 import pandas as pd
 import os
-
-MODEL_PATH = "../models/best_model.pkl"
+from sklearn.metrics import r2_score
+from preprocessing import target_columns
+MODEL_PATH = "../models/xgb.pkl"
 
 def load_best_model():
     if not os.path.exists(MODEL_PATH):
@@ -16,19 +17,12 @@ def predict_new_ecr(new_data: pd.DataFrame):
     return predictions
 
 if __name__ == "__main__":
-    # Example input (must match training features)
-    sample_input = pd.DataFrame([{
-        "Product_Type": "Electronics",
-        "Component_Name": "PCB_Module",
-        "Change_Type": "Design",
-        "Urgency": "High",
-        "Change_Complexity": 7,
-        "Supplier_Criticality": 8,
-        "Past_Similar_Changes": 3,
-        "Team_Experience_Level": 4,
-        "BOM_Depth": 5
-    }])
+    target = target_columns
+    test_data = pd.read_csv("/home/sid/Documents/Product Lifecycle Management/src/ecr_data.csv")
 
-    preds = predict_new_ecr(sample_input)
+
+    preds = predict_new_ecr(test_data)
+    r2 = r2_score(test_data[target], preds)
+    print(f"The r2 score is {r2}")
     print("\nPredicted Output for New ECR:")
     print(preds)

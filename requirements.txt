@@ -6,3 +6,6 @@ plotly
 nbformat
 scikit-learn
 xgboost
+optuna
+joblib
+streamlit

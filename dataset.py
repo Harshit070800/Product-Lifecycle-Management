@@ -6,7 +6,7 @@ import random
 np.random.seed(42)
 
 # Number of samples
-n_samples = 2000
+n_samples = 1000
 
 # Possible categories
 product_types = ["Engine", "Battery", "PCB", "Chassis", "Display"]
@@ -68,6 +68,8 @@ df = pd.DataFrame({
 })
 
 # Save to CSV
-df.to_csv("ecr_data.csv", index=False)
+# df.to_csv("data/ecr_data.csv", index=False)
+df.to_csv("/home/sid/Documents/Product Lifecycle Management/src/ecr_data.csv", index=False)
 print("Synthetic ECR dataset created: ecr_data.csv")
 print(df.head())
+print(df['ECR_ID'].count())
